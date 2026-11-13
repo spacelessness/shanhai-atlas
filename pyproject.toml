@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shanhai-atlas"
+version = "0.2.0"
+description = "Shanhai Atlas / 山海图 — publication-ready geoscience figures: geographic maps, topography, structural geology and seismology in one reproducible Python toolkit"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "spacelessness"}]
+keywords = ["matplotlib", "seismology", "geology", "topography", "cartography",
+            "scientific-figures", "geoscience", "svg", "pptx"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = [
+    "numpy>=1.24",
+    "matplotlib>=3.7",
+    "fonttools>=4.40",
+]
+
+[project.optional-dependencies]
+geo = ["basemap-data-hires>=2.0"]           # GSHHG 海岸线 f / h 分辨率（纯数据包，LGPL）
+ppt = ["python-pptx>=1.0"]
+tiff = ["tifffile>=2023.1"]
+netcdf = ["xarray>=2023.1", "netCDF4>=1.6"]  # NetCDF / GMT grd
+shapefile = ["pyshp>=2.3"]                   # Shapefile 读入
+seismo = ["obspy>=1.4"]                      # 震源机制球（LGPL-3.0）
+all = ["basemap-data-hires>=2.0", "python-pptx>=1.0", "tifffile>=2023.1",
+       "xarray>=2023.1", "netCDF4>=1.6", "pyshp>=2.3", "obspy>=1.4"]
+# 不提供 rasterio extra：它会把 numpy 顶到 2.x，与 tifffile / 本地 1.x 环境冲突。
+# 确有 GeoTIFF CRS 需求时请自行在独立环境安装，并显式转换 CRS。
+dev = ["pytest>=7", "pyflakes>=3"]
+
+[project.urls]
+Homepage = "https://github.com/spacelessness/shanhai-atlas"
+Issues = "https://github.com/spacelessness/shanhai-atlas/issues"
+Changelog = "https://github.com/spacelessness/shanhai-atlas/blob/main/CHANGELOG.md"
+
+[project.scripts]
+shanhai-atlas = "shanhai_atlas.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["shanhai_atlas*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

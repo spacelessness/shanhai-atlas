@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+.venv/
+venv/
+.mypy_cache/
+.coverage
+
+# 本地生成物（示例与图件不入库）
+output/
+gallery/
+*.pptx
+*.pdf
+*.eps
+*.tif
+
+# 字体缓存 / 数据缓存（绝不入库）
+*.ttf
+*.otf
+*.woff
+*.woff2
+*.csv
+*.npz
+*.nc
+*.grd
+*.shp
+*.dbf
+*.shx
+
+# 例外：文档预览图
+!docs/images/*.png
+
+# 编辑器 / 系统
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
